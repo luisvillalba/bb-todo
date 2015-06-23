@@ -1,11 +1,9 @@
-(function () {
-    var myModel = Backbone.Model.extend({});
-    
-    var rec_view = Backbone.View.extend({
-        
-    });
-    
-    var model = new myModel({});
-    
-})();
+var app = app || {},
+    ENTER_KEY = 13;
 
+$(function () {
+	'use strict';
+    
+    // Calls the app initializer once the dom is loaded
+    app.init();
+});
