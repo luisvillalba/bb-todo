@@ -1,3 +1,4 @@
 .DS_Store
-js/vendor
+dev/js/vendor
 install/node_modules
+*.log

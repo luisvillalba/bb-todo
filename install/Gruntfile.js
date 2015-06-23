@@ -1,23 +1,16 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
-  grunt.initConfig({
-    uglify: {
-      my_target: {
-        files: {
-          '../../deploy/js/main.min.js': ['../js/main.js']
-        }
-      }
-    },
-    watch: {
-      files: [''],
-      tasks: ['handlebars']
-    }
-  });
+	grunt.initConfig({
+		auto_install: {
+			local: {
+				npm: true
+			}
+		}
+	});
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-
-  grunt.registerTask('default', ['uglify']);
-  grunt.registerTask('deploy', ['handlebarsDeploy']);
+	grunt.loadNpmTasks('grunt-auto-install');
+	
+	grunt.registerTask('default', []);
+	grunt.registerTask('install', ['auto_install']);
 
 };
