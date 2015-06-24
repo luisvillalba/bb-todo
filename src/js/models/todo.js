@@ -6,10 +6,7 @@ define([
 		'underscore',
 		'backbone'
 	], 
-	function (
-		_,
-		Backbone
-	) {
+	function (_, Backbone) {
 		/** 
 		 *	Since we need to define some specific behaviors, the Todo model
 		 *	is going to extend the Backbone model object

@@ -1,5 +1,3 @@
-
-
   var app = app || {};
 
   // The Application

@@ -10,13 +10,7 @@ define([
 		'todomodel',
 		'ls'
 	], 
-	function (
-		$, 
-		_,
-		Backbone,
-		todomodel,
-		ls
-	) {
+	function ($, _,	Backbone, todomodel, ls) {
 		var TodoList = Backbone.Collection.extend({
 			/** 
 			 *	This collection groups Todo models, so it has to be linked to the model definition
