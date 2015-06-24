@@ -25,7 +25,14 @@ require.config({
 		'backbone.localStorage': {
 			"deps": ['backbone'],
 			"exports": "Backbone"
-		}
+		},
+        'handlebars': {
+            exports: 'Handlebars'
+        },
+        'hbHelpers': {
+            deps: ['handlebars'],
+            exports: 'Handlebars'
+        }
 	}
 });
 
