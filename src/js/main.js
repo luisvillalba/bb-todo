@@ -1,13 +1,14 @@
 require.config({
     "baseUrl": "js",
     "paths": {
+		"text" : "vendor/requirejs-text/text",
         "jquery": "vendor/jquery/dist/jquery.min",
 		"underscore": "vendor/underscore/underscore-min",
 		"backbone": "vendor/backbone/backbone-min",
-		"ls": "vendor/backbone-localstorage/backbone-localstorage",
-		"handlebars": "vendor/handlebars/handlebars.min",
+		"ls": "vendor/backbone.localstorage/backbone.localStorage",
+		"handlebars": "vendor/handlebars/handlebars",
 		"hbHelpers": "app/hb-helpers",
-		"templates": "views/templates/templates",
+		//"templates": "views/templates/templates",
 		"appview": "views/app-view",
 		"todoview": "views/todo-view",
 		"todomodel": "models/todo",
@@ -26,14 +27,6 @@ require.config({
 			"deps": ['backbone'],
 			"exports": "Backbone"
 		},
-        'handlebars': {
-            deps: ['handlebars'],
-            exports: 'Handlebars'
-        },
-        'templates': {
-            deps: ['handlebars'],
-            exports: 'Handlebars'
-        },
         'hbHelpers': {
             deps: ['handlebars'],
             exports: 'Handlebars'
@@ -43,6 +36,6 @@ require.config({
 
 require([
 	'app/app'
-], function(App){
+], function(App) {
 	App.init();
 });

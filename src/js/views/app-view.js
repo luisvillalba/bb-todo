@@ -1,11 +1,15 @@
 define([
-		'underscore',
 		'backbone',
-		'todocol', 
+		'todocol',
 		'todomodel',
-		'templates'
+		'todoview',
+		'handlebars',
+		'hbHelpers',
+		'text!views/templates/hbs/stats_template.hbs'
 	], 
-	function (_, Backbone, Todos, todo, templates) {
+	function (Backbone, todocol, todomodel, todoview, Handlebars, helpers, template) {
+		'use strict';
+	
 		var ENTER_KEY = 13;
 	
 		var AppView = Backbone.View.extend({
@@ -13,7 +17,7 @@ define([
 			el: '#todoapp',
 			
 			/* Statistics template */
-			statsTemplate: templates['stats_template'],
+			statsTemplate: Handlebars.compile(template),
 			
 			/* Define all the events of for the view and their handlers */
 			events: {
@@ -24,27 +28,28 @@ define([
 
 			/* This method is going to be executed once the view is instantiated */
 			initialize: function () {
+				this.Todos = new todocol();
 				this.allCheckbox = this.$('#toggle-all')[0];
 				this.$input = this.$('#new-todo');
 				this.$footer = this.$('#footer');
 				this.$main = this.$('#main');
 
-				this.listenTo(Todos, 'add', this.addOne);
-				this.listenTo(Todos, 'reset', this.addAll);
+				this.listenTo(this.Todos, 'add', this.addOne);
+				this.listenTo(this.Todos, 'reset', this.addAll);
 
 				// New
-				this.listenTo(Todos, 'change:completed', this.filterOne);
-				this.listenTo(Todos, 'filter', this.filterAll);
-				this.listenTo(Todos, 'all', this.render);
+				this.listenTo(this.Todos, 'change:completed', this.filterOne);
+				this.listenTo(this.Todos, 'filter', this.filterAll);
+				this.listenTo(this.Todos, 'all', this.render);
 
-				Todos.fetch();
+				this.Todos.fetch();
 			},
 
 			render: function () {
-				var completed = Todos.completed().length;
-				var remaining = Todos.remaining().length;
+				var completed = this.Todos.getCompleted().length;
+				var remaining = this.Todos.getRemaining().length;
 
-				if (Todos.length) {
+				if (this.Todos.length) {
 					this.$main.show();
 					this.$footer.show();
 
@@ -67,7 +72,7 @@ define([
 
 			/* Adds a single todo to the list */
 			addOne: function (todo) {
-				var view = new app.TodoView({
+				var view = new todoview({
 					model: todo
 				});
 				$('#todo-list').append(view.render().el);
@@ -76,7 +81,7 @@ define([
 			// Add all items in the **Todos** collection at once.
 			addAll: function () {
 				this.$('#todo-list').html('');
-				Todos.each(this.addOne, this);
+				this.Todos.each(this.addOne, this);
 			},
 
 			// New
@@ -86,7 +91,7 @@ define([
 
 			// New
 			filterAll: function () {
-				Todos.each(this.filterOne, this);
+				this.Todos.each(this.filterOne, this);
 			},
 
 
@@ -95,7 +100,7 @@ define([
 			newAttributes: function () {
 				return {
 					title: this.$input.val().trim(),
-					order: Todos.nextOrder(),
+					order: this.Todos.nextOrder(),
 					completed: false
 				};
 			},
@@ -108,14 +113,14 @@ define([
 					return;
 				}
 
-				Todos.create(this.newAttributes());
+				this.Todos.create(this.newAttributes());
 				this.$input.val('');
 			},
 
 			// New
 			// Clear all completed todo items, destroying their models.
 			clearCompleted: function () {
-				_.invoke(Todos.completed(), 'destroy');
+				_.invoke(this.Todos.getCompleted(), 'destroy');
 				return false;
 			},
 
@@ -123,18 +128,14 @@ define([
 			toggleAllComplete: function () {
 				var completed = this.allCheckbox.checked;
 
-				Todos.each(function (todo) {
+				this.Todos.each(function (todo) {
 					todo.save({
 						'completed': completed
 					});
 				});
 			}
 		});
-		
-		return  AppView;
+	
+		return AppView;
 	}
 );
-
-// The Application
-// ---------------
-

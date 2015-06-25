@@ -1,14 +1,15 @@
 define([
-'underscore',
 'backbone',
-'templates'
+'handlebars',
+'hbHelpers',
+'text!views/templates/hbs/stats_template.hbs'
 ],
-	function (_, Backbone, templates) {
+	function (Backbone, Handlebars, helpers, template) {
 		var TodoView = Backbone.View.extend({
 
 			tagName: 'li',
 
-			template: templates['item_template'],
+			template: Handlebars.compile(template),
 
 			events: {
               'click .toggle': 'togglecompleted',
@@ -40,10 +41,10 @@ define([
 
             isHidden : function () {
               var isCompleted = this.model.get('completed');
-              return ( // hidden cases only
+              /*return ( // hidden cases only
                 (!isCompleted && app.TodoFilter === 'completed')
                 || (isCompleted && app.TodoFilter === 'active')
-              );
+              );*/ 
             },
 
             togglecompleted: function() {

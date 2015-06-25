@@ -22,7 +22,8 @@
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
     "grunt-contrib-jshint": "~0.11.2",
-    "backbone-localstorage": "~0.3.2",
-    "requirejs": "~2.1.18"
+    "requirejs": "~2.1.18",
+    "backbone.localStorage": "~1.1.16",
+    "requirejs-text": "~2.0.14"
   }
 }

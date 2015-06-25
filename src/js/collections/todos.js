@@ -4,14 +4,11 @@
  * @filename 
  */
 define([
-		'jquery',
-		'underscore',
 		'backbone',
 		'todomodel',
 		'ls'
 	], 
-	function ($, _,	Backbone, todomodel, ls) {
-        console.log(todomodel);
+	function (Backbone, todomodel, ls) {
 		var TodoList = Backbone.Collection.extend({
 			/** 
 			 *	This collection groups Todo models, so it has to be linked to the model definition
@@ -19,7 +16,7 @@ define([
 			"model": todomodel,
 
 			/* This attribute is going to act as a namespace for the backbone app on the LS */
-			"localStorage": new ls.LocalStorage('todos-backbone'),
+			"localStorage": new Backbone.LocalStorage('todos-backbone'),
 
 			/*=============================== Utilities ===============================*/
 			/** 
@@ -58,14 +55,10 @@ define([
 			 *	@return [model] List of models which aren't completed
 			 */
 			"getRemaining": function () {
-				return this.without.apply(this, this.completed());
+				return this.without.apply(this, this.getCompleted());
 			}
 		});
-	
-		var init = function(){
-			return TodoList;
-		}
 		
-		return init();
+		return TodoList;
 	}
 );
