@@ -59,6 +59,6 @@ define([
 			}
 		});
 		
-		return TodoList;
+		return new TodoList();
 	}
 );

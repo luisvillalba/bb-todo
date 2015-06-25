@@ -8,7 +8,6 @@ require.config({
 		"ls": "vendor/backbone.localstorage/backbone.localStorage",
 		"handlebars": "vendor/handlebars/handlebars",
 		"hbHelpers": "app/hb-helpers",
-		//"templates": "views/templates/templates",
 		"appview": "views/app-view",
 		"todoview": "views/todo-view",
 		"todomodel": "models/todo",

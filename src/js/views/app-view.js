@@ -1,16 +1,13 @@
 define([
 		'backbone',
 		'todocol',
-		'todomodel',
 		'todoview',
 		'handlebars',
 		'hbHelpers',
 		'text!views/templates/hbs/stats_template.hbs'
 	], 
-	function (Backbone, todocol, todomodel, todoview, Handlebars, helpers, template) {
+	function (Backbone, todocol, todoview, Handlebars, helpers, template) {
 		'use strict';
-	
-		var ENTER_KEY = 13;
 	
 		var AppView = Backbone.View.extend({
 			/* This makes the view to work over an existing element */
@@ -28,7 +25,7 @@ define([
 
 			/* This method is going to be executed once the view is instantiated */
 			initialize: function () {
-				this.Todos = new todocol();
+				this.Todos = todocol;
 				this.allCheckbox = this.$('#toggle-all')[0];
 				this.$input = this.$('#new-todo');
 				this.$footer = this.$('#footer');
@@ -37,7 +34,6 @@ define([
 				this.listenTo(this.Todos, 'add', this.addOne);
 				this.listenTo(this.Todos, 'reset', this.addAll);
 
-				// New
 				this.listenTo(this.Todos, 'change:completed', this.filterOne);
 				this.listenTo(this.Todos, 'filter', this.filterAll);
 				this.listenTo(this.Todos, 'all', this.render);
@@ -60,7 +56,7 @@ define([
 
 					this.$('#filters li a')
 						.removeClass('selected')
-						.filter('[href="#/' + (app.TodoFilter || '') + '"]')
+						.filter('[href="#/' + (Global.TodoFilter || '') + '"]')
 						.addClass('selected');
 				} else {
 					this.$main.hide();
@@ -84,19 +80,14 @@ define([
 				this.Todos.each(this.addOne, this);
 			},
 
-			// New
 			filterOne: function (todo) {
 				todo.trigger('visible');
 			},
 
-			// New
 			filterAll: function () {
 				this.Todos.each(this.filterOne, this);
 			},
 
-
-			// New
-			// Generate the attributes for a new Todo item.
 			newAttributes: function () {
 				return {
 					title: this.$input.val().trim(),
@@ -105,11 +96,8 @@ define([
 				};
 			},
 
-			// New
-			// If you hit return in the main input field, create new Todo model,
-			// persisting it to localStorage.
 			createOnEnter: function (event) {
-				if (event.which !== ENTER_KEY || !this.$input.val().trim()) {
+				if (event.which !== Global.ENTER_KEY || !this.$input.val().trim()) {
 					return;
 				}
 
@@ -117,14 +105,11 @@ define([
 				this.$input.val('');
 			},
 
-			// New
-			// Clear all completed todo items, destroying their models.
 			clearCompleted: function () {
 				_.invoke(this.Todos.getCompleted(), 'destroy');
 				return false;
 			},
 
-			// New
 			toggleAllComplete: function () {
 				var completed = this.allCheckbox.checked;
 
