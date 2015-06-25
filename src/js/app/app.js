@@ -3,14 +3,18 @@ define([
     'underscore',
     'backbone',
     'todomodel',
-    'todocol'
+    'todocol',
+    'router',
+    'appview'
     ],
-    function ($, _, Backbone, todomodel, todocol) {
+    function ($, _, Backbone, todomodel, todocol, router, appview) {
         'use strict';
 
         var app = {
             "TodoModel": todomodel,
-            "Todos": todocol
+            "Todos": todocol,
+            "TodoFilter": router.todofilter,
+            "AppView": appview
         };
 
         /* Initializes the application */

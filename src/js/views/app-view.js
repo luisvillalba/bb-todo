@@ -2,7 +2,7 @@ define([
 		'underscore',
 		'backbone',
 		'todocol', 
-		'todomodel'
+		'todomodel',
 		'templates'
 	], 
 	function (_, Backbone, Todos, todo, templates) {

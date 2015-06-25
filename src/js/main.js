@@ -4,7 +4,7 @@ require.config({
         "jquery": "vendor/jquery/dist/jquery.min",
 		"underscore": "vendor/underscore/underscore-min",
 		"backbone": "vendor/backbone/backbone-min",
-		"ls": "vendor/backbone-localstorage/backbone-localstorage.min",
+		"ls": "vendor/backbone-localstorage/backbone-localstorage",
 		"handlebars": "vendor/handlebars/handlebars.min",
 		"hbHelpers": "app/hb-helpers",
 		"templates": "views/templates/templates",
@@ -22,11 +22,16 @@ require.config({
 			"deps": ['underscore', 'jquery'],
 			"exports": "Backbone"
 		},
-		'backbone.localStorage': {
+		'ls': {
 			"deps": ['backbone'],
 			"exports": "Backbone"
 		},
         'handlebars': {
+            deps: ['handlebars'],
+            exports: 'Handlebars'
+        },
+        'templates': {
+            deps: ['handlebars'],
             exports: 'Handlebars'
         },
         'hbHelpers': {
