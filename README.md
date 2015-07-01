@@ -1,6 +1,6 @@
 ## Backbone Based - To do list
 
-This application allows you to locate stores arround you according to your needs. This uses Foursquare API in order to find those places.
+This application allows you to handle a to do list using local storage.
 
 ### Instructions to get it running:
 - Clone the repo on your computer
@@ -12,6 +12,7 @@ This application allows you to locate stores arround you according to your needs
 - BackboneJS
 - RequireJS
 - RequireJS Text plugin
+- BackboneJS Local Storage plugin
 - Bower
 - Bootstrap
 - jQuery
