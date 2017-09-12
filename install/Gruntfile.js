@@ -1,5 +1,4 @@
 module.exports = function (grunt) {
-
 	grunt.initConfig({
 		auto_install: {
 			local: {
@@ -7,10 +6,7 @@ module.exports = function (grunt) {
 			}
 		}
 	});
-
-	grunt.loadNpmTasks('grunt-auto-install');
-	
-	grunt.registerTask('default', []);
-	grunt.registerTask('install', ['auto_install']);
-
+	grunt.loadNpmTasks("grunt-auto-install");
+	grunt.registerTask("default", []);
+	grunt.registerTask("install", ["auto_install"]);
 };

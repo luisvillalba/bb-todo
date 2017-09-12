@@ -3,11 +3,11 @@
  */
 
 define([
-		'underscore',
-		'backbone'
-	], 
+	"underscore",
+	"backbone"
+],
 	function (_, Backbone) {
-		/** 
+		/**
 		 *	Since we need to define some specific behaviors, the Todo model
 		 *	is going to extend the Backbone model object
 		 */
@@ -22,11 +22,11 @@ define([
 			"toggle": function () {
 				console.log("toggle");
 				this.save({
-					completed: !this.get('completed')
+					completed: !this.get("completed")
 				});
 			}
 		});
-		
+
 		return  Todo;
 	}
 );

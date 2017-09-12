@@ -1,8 +1,8 @@
 require.config({
-    "baseUrl": "js",
-    "paths": {
-		"text" : "vendor/requirejs-text/text",
-        "jquery": "vendor/jquery/dist/jquery.min",
+	"baseUrl": "js",
+	"paths": {
+		"text": "vendor/requirejs-text/text",
+		"jquery": "vendor/jquery/dist/jquery.min",
 		"underscore": "vendor/underscore/underscore-min",
 		"backbone": "vendor/backbone/backbone-min",
 		"ls": "vendor/backbone.localstorage/backbone.localStorage",
@@ -13,28 +13,28 @@ require.config({
 		"todomodel": "models/todo",
 		"todocol": "collections/todos",
 		"router": "routers/router"
-    },
+	},
 	"shim": {
 		"underscore": {
 			"exports": "_"
 		},
 		"backbone": {
-			"deps": ['underscore', 'jquery'],
+			"deps": ["underscore", "jquery"],
 			"exports": "Backbone"
 		},
-		'ls': {
-			"deps": ['backbone'],
+		"ls": {
+			"deps": ["backbone"],
 			"exports": "Backbone"
 		},
-        'hbHelpers': {
-            deps: ['handlebars'],
-            exports: 'Handlebars'
-        }
+		"hbHelpers": {
+			deps: ["handlebars"],
+			exports: "Handlebars"
+		}
 	}
 });
 
 require([
-	'app/app'
-], function(App) {
+	"app/app"
+], function (App) {
 	App.init();
 });

@@ -1,42 +1,42 @@
 define([
-		'backbone',
-		'todocol',
-		'todoview',
-		'handlebars',
-		'hbHelpers',
-		'text!views/templates/hbs/stats_template.hbs'
-	], 
+	"backbone",
+	"todocol",
+	"todoview",
+	"handlebars",
+	"hbHelpers",
+	"text!views/templates/hbs/stats_template.hbs"
+],
 	function (Backbone, todocol, todoview, Handlebars, helpers, template) {
-		'use strict';
-	
+		"use strict";
+
 		var AppView = Backbone.View.extend({
 			/* This makes the view to work over an existing element */
-			el: '#todoapp',
-			
+			el: "#todoapp",
+
 			/* Statistics template */
 			statsTemplate: Handlebars.compile(template),
-			
+
 			/* Define all the events of for the view and their handlers */
 			events: {
-				'keypress #new-todo': 'createOnEnter',
-				'click #clear-completed': 'clearCompleted',
-				'click #toggle-all': 'toggleAllComplete'
+				"keypress #new-todo": "createOnEnter",
+				"click #clear-completed": "clearCompleted",
+				"click #toggle-all": "toggleAllComplete"
 			},
 
 			/* This method is going to be executed once the view is instantiated */
 			initialize: function () {
 				this.Todos = todocol;
-				this.allCheckbox = this.$('#toggle-all')[0];
-				this.$input = this.$('#new-todo');
-				this.$footer = this.$('#footer');
-				this.$main = this.$('#main');
+				this.allCheckbox = this.$("#toggle-all")[0];
+				this.$input = this.$("#new-todo");
+				this.$footer = this.$("#footer");
+				this.$main = this.$("#main");
 
-				this.listenTo(this.Todos, 'add', this.addOne);
-				this.listenTo(this.Todos, 'reset', this.addAll);
+				this.listenTo(this.Todos, "add", this.addOne);
+				this.listenTo(this.Todos, "reset", this.addAll);
 
-				this.listenTo(this.Todos, 'change:completed', this.filterOne);
-				this.listenTo(this.Todos, 'filter', this.filterAll);
-				this.listenTo(this.Todos, 'all', this.render);
+				this.listenTo(this.Todos, "change:completed", this.filterOne);
+				this.listenTo(this.Todos, "filter", this.filterAll);
+				this.listenTo(this.Todos, "all", this.render);
 
 				this.Todos.fetch();
 			},
@@ -54,10 +54,10 @@ define([
 						remaining: remaining
 					}));
 
-					this.$('#filters li a')
-						.removeClass('selected')
-						.filter('[href="#/' + (Global.TodoFilter || '') + '"]')
-						.addClass('selected');
+					this.$("#filters li a")
+						.removeClass("selected")
+						.filter("[href=\"#/" + (Global.TodoFilter || "") + "\"]")
+						.addClass("selected");
 				} else {
 					this.$main.hide();
 					this.$footer.hide();
@@ -71,17 +71,17 @@ define([
 				var view = new todoview({
 					model: todo
 				});
-				$('#todo-list').append(view.render().el);
+				$("#todo-list").append(view.render().el);
 			},
 
 			// Add all items in the **Todos** collection at once.
 			addAll: function () {
-				this.$('#todo-list').html('');
+				this.$("#todo-list").html("");
 				this.Todos.each(this.addOne, this);
 			},
 
 			filterOne: function (todo) {
-				todo.trigger('visible');
+				todo.trigger("visible");
 			},
 
 			filterAll: function () {
@@ -102,11 +102,11 @@ define([
 				}
 
 				this.Todos.create(this.newAttributes());
-				this.$input.val('');
+				this.$input.val("");
 			},
 
 			clearCompleted: function () {
-				_.invoke(this.Todos.getCompleted(), 'destroy');
+				_.invoke(this.Todos.getCompleted(), "destroy");
 				return false;
 			},
 
@@ -115,12 +115,12 @@ define([
 
 				this.Todos.each(function (todo) {
 					todo.save({
-						'completed': completed
+						"completed": completed
 					});
 				});
 			}
 		});
-	
+
 		return AppView;
 	}
 );
